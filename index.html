@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gerenciamento de Clientes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="highlight">Cliente</span>Manager</h1>
+            <p class="subtitle">Sistema simples e elegante para gerenciamento de clientes</p>
+        </header>
+
+        <main>
+            <!-- Navegação -->
+            <nav class="tabs">
+                <button id="list-tab" class="tab-button active">
+                    <span class="material-symbols-rounded">group</span>
+                    Lista de Clientes
+                </button>
+                <button id="form-tab" class="tab-button">
+                    <span class="material-symbols-rounded">person_add</span>
+                    Cadastrar Cliente
+                </button>
+            </nav>
+
+            <!-- Seção de lista de clientes -->
+            <section id="clients-list-section" class="section active">
+                <h2>Clientes Cadastrados</h2>
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Buscar cliente por nome ou email...">
+                </div>
+                <div class="clients-container" id="clients-container">
+                </div>
+            </section>
+
+            <!-- Seção de formulário (cadastro/edição) -->
+            <section id="client-form-section" class="section">
+                <h2 id="form-title">Cadastrar Novo Cliente</h2>
+                <form id="client-form">
+                    <input type="hidden" id="client-id">
+                    
+                    <div class="form-group">
+                        <label for="client-name">Nome:</label>
+                        <input type="text" id="client-name" required placeholder="Nome completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-email">Email:</label>
+                        <input type="email" id="client-email" required placeholder="email@exemplo.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-phone">Telefone:</label>
+                        <input type="tel" id="client-phone" placeholder="(00) 00000-0000">
+                    </div>
+                    
+                    <div class="form-group" id="attributes-section">
+                        <label>Atributos:</label>
+                        <p class="attributes-help">Adicione informações personalizadas ao cliente</p>
+                        <div id="attributes-container">
+                            
+                        </div>
+                        <button type="button" id="add-attribute-btn" class="secondary-button">
+                            <span class="material-symbols-rounded">add</span>
+                            Adicionar Atributo
+                        </button>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="primary-button">
+                            <span class="material-symbols-rounded">save</span>
+                            Salvar
+                        </button>
+                        <button type="button" id="cancel-button" class="secondary-button">
+                            <span class="material-symbols-rounded">close</span>
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Seção de detalhes do cliente -->
+            <section id="client-details-section" class="section">
+                <div class="section-header">
+                    <h2>Detalhes do Cliente</h2>
+                    <div class="action-buttons">
+                        <button id="edit-client-btn" class="secondary-button">
+                            <span class="material-symbols-rounded">edit</span>
+                            Editar
+                        </button>
+                        <button id="delete-client-btn" class="danger-button">
+                            <span class="material-symbols-rounded">delete</span>
+                            Excluir
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="client-details" id="client-details-container">
+                </div>
+                
+                <div class="client-attributes">
+                    <h3>Atributos</h3>
+                    <div id="client-attributes-container">
+                        
+                    </div>
+                    <div class="add-attribute-form" id="add-attribute-form-container">
+                        <h3>Adicionar Novo Atributo</h3>
+                        <form id="add-attribute-form">
+                            <div class="form-group">
+                                <label for="attribute-key">Chave:</label>
+                                <input type="text" id="attribute-key" required placeholder="Ex: Empresa">
+                            </div>
+                            <div class="form-group">
+                                <label for="attribute-value">Valor:</label>
+                                <input type="text" id="attribute-value" required placeholder="Ex: Empresa XYZ">
+                            </div>
+                            <button type="submit" class="primary-button">
+                                <span class="material-symbols-rounded">add</span>
+                                Adicionar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <button id="back-to-list-btn" class="secondary-button">
+                    <span class="material-symbols-rounded">arrow_back</span>
+                    Voltar para Lista
+                </button>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> - Sistema de Gerenciamento de Clientes</p>
+        </footer>
+    </div>
+
+    <template id="client-card-template">
+        <div class="client-card" data-id="">
+            <div class="client-avatar">
+                <span class="material-symbols-rounded">person</span>
+            </div>
+            <h3 class="client-name"></h3>
+            <p class="client-email"></p>
+            <button class="view-details-btn">
+                <span class="material-symbols-rounded">visibility</span>
+                Ver Detalhes
+            </button>
+        </div>
+    </template>
+
+    <template id="attribute-item-template">
+        <div class="attribute-item" data-id="">
+            <div class="attribute-content">
+                <span class="attribute-key"></span>: <span class="attribute-value"></span>
+            </div>
+        </div>
+    </template>
+
+    <template id="attribute-input-template">
+        <div class="attribute-input">
+            <input type="text" class="attribute-key-input" placeholder="Chave" required>
+            <input type="text" class="attribute-value-input" placeholder="Valor" required>
+            <button type="button" class="remove-attribute-btn">
+                <span class="material-symbols-rounded">delete</span>
+            </button>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
