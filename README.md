@@ -19,7 +19,6 @@ Não é necessário instalação. Para executar o frontend:
 1. Clone este repositório:
 ```
 git clone <URL-do-repositório>
-cd frontend
 ```
 
 2. Abra o arquivo index.html diretamente no navegador:
